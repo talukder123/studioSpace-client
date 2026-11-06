@@ -5,6 +5,9 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const googleSans  = Google_Sans_Flex({
@@ -29,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Footer></Footer>
         
+        <ToastContainer position="top-right" autoClose={3000} />
         </body>
     </html>
   );

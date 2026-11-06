@@ -31,8 +31,11 @@ const Navbar = () => {
                             <Link href="/" className="text-orange-500 font-semibold">
                                 Home
                             </Link>
-                            <Link href="/studios" className="text-gray-600 hover:text-orange-500 transition">
+                            <Link href="/explore-studios" className="text-gray-600 hover:text-orange-500 transition">
                                 Explore Studios
+                            </Link>
+                            <Link href="/add-new-studio" className="text-gray-600 hover:text-orange-500 transition">
+                                Temp add
                             </Link>
                             <a href="#how-it-works" className="text-gray-600 hover:text-orange-500 transition">
                                 How It Works

@@ -1,10 +1,21 @@
 'use client';
 import AddNewStudioForm, { StudioSubmission } from "@/components/addNewStudio/addNewStudioForm";
+import { toast } from "react-toastify";
 
 const AddNewStudioPage = () => {
 
     const handleAddStudio = async (studio: StudioSubmission) => {
-    console.log("Received Studio Data:", studio);
+        const res = await fetch("http://localhost:8000/add-new-studio", {
+            method: "POST",
+            headers : {
+                "Content-type" : "application/json", 
+            },
+            body : JSON.stringify(studio)
+        })
+
+        const data = await res.json();
+        console.log(data);
+         toast.success("Studio added successfully!");
     
   };
 
