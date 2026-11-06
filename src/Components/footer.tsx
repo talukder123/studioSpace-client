@@ -141,7 +141,7 @@ const Footer = () => {
                     <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row items-center justify-between gap-4">
 
                         <p className="text-sm text-gray-500 text-center">
-                            © {new Date().getFullYear()} StudioSpace. All rights reserved.
+                            © 2026 StudioSpace. All rights reserved.
                         </p>
 
                         <div className="flex items-center gap-6 text-sm text-gray-400">
