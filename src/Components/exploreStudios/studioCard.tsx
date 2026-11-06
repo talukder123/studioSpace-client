@@ -15,8 +15,8 @@ const StudioCard = ({ studio }: StudioCardProps) => {
                 <Image
                     src={studio.imageUrl}
                     alt={studio.title}
-                    width={20}
-                    height={20}
+                    width={1200}
+                    height={800}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
