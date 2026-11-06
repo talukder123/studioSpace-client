@@ -74,7 +74,7 @@ const StudioCard = ({ studio }: StudioCardProps) => {
                     <div>
                         <p className="text-xs text-base-content/50">Hourly Rate</p>
                         <p className="text-xl font-bold text-orange-500">
-                            ৳{studio.hourlyRate}
+                            ${studio.hourlyRate}
                             <span className="ml-1 text-xs font-medium text-base-content/50">
                                 / hour
                             </span>

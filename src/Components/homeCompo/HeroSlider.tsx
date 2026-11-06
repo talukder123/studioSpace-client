@@ -28,8 +28,14 @@ type HeroSliderProps = {
 };
 
 const CTA = {
-  explore: { label: "Explore Studios", href: "/studios" },
-  host: { label: "Host Your Space", href: "/studios" },
+  explore: {
+    label: "Explore Studios",
+    href: "/explore-studios",
+  },
+  host: {
+    label: "Host Your Space",
+    href: "/add-new-studio",
+  },
 } as const;
 
 const swiperThemeVars = {

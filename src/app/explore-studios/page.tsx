@@ -10,11 +10,11 @@ const ExploreStudiosPage = async () => {
     console.log(data);
 
     return (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {data.map((studio:IStudio) => (
-        <StudioCard key={studio._id} studio={studio} />
-      ))}
-    </div>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 my-5 md:grid-cols-2 my-6 lg:grid-cols-3 my-7">
+            {data.map((studio: IStudio) => (
+                <StudioCard key={studio._id} studio={studio} />
+            ))}
+        </div>
     );
 };
 
