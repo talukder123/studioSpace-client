@@ -1,5 +1,6 @@
 import { IStudio } from '@/Type/studio';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 interface StudioCardProps {
@@ -81,9 +82,12 @@ const StudioCard = ({ studio }: StudioCardProps) => {
                         </p>
                     </div>
 
+                    <Link href={`http://localhost:3000/explore-studios/${studio._id}`}>
                     <button className="rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-orange-600 active:scale-95">
                         View Details →
                     </button>
+                    </Link>
+
                 </div>
 
             </div>
