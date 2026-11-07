@@ -1,9 +1,13 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import { createRouteTreeNode } from "next/dist/client/components/segment-cache/decode-server-response";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const inputClass =
     "h-11 w-full rounded-lg border border-input bg-background px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-[#F97316] focus-visible:ring-2 focus-visible:ring-[#F97316]/20 dark:bg-input/30";
@@ -23,28 +27,61 @@ const validatePassword = (password: string) => {
 };
 
 const SignUpPage = () => {
+
+    const router = useRouter();
+
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [photoUrl, setPhotoUrl] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const error = validatePassword(password);
 
         if (error) {
             setPasswordError(error);
-            return; // Do not proceed while the password is invalid.
+            return;
         }
 
         setPasswordError("");
 
-        // All form data is received here. Backend/registration comes later.
         const formData = { name, email, photoUrl, password };
-        console.log("Registration form data:", formData);
+
+        try {
+            const { data, error } = await authClient.signUp.email({
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+                image: formData.photoUrl,
+            });
+
+            if (error) {
+                toast.error(error.message);
+                return;
+            }
+
+            console.log("Registration successful:", data);
+
+            toast.success("Registration successful!");
+
+            router.push("/login");
+
+        } catch (error) {
+            toast.error("Something went wrong!");
+            console.error(error);
+        }
     };
+
+    const handleGoogleSignUp = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+        console.log(data);
+    }
 
     return (
         <main className="flex-1 bg-muted/30">
@@ -124,9 +161,8 @@ const SignUpPage = () => {
                                 required
                                 aria-invalid={passwordError ? true : undefined}
                                 aria-describedby={passwordError ? "password-error" : undefined}
-                                className={`${inputClass} ${
-                                    passwordError ? "border-destructive focus-visible:border-destructive" : ""
-                                }`}
+                                className={`${inputClass} ${passwordError ? "border-destructive focus-visible:border-destructive" : ""
+                                    }`}
                             />
                             {passwordError && (
                                 <p
@@ -155,6 +191,7 @@ const SignUpPage = () => {
                     </div>
 
                     <button
+                        onClick={handleGoogleSignUp}
                         type="button"
                         className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F97316]/30"
                     >

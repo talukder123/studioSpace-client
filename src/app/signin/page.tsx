@@ -1,19 +1,24 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const inputClass =
     "h-11 w-full rounded-lg border border-input bg-background px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-[#F97316] focus-visible:ring-2 focus-visible:ring-[#F97316]/20 dark:bg-input/30";
 
 const SignInPage = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!email.trim() || !password.trim()) {
@@ -23,10 +28,37 @@ const SignInPage = () => {
 
         setError("");
 
-        // Email and password are received here. Backend/login comes later.
         const formData = { email, password };
-        console.log("Login form data:", formData);
+
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email: formData.email,
+                password: formData.password,
+            });
+
+            if (error) {
+                setError(error.message || "Login failed. Please try again!");
+                toast.error(error.message);
+                return;
+            }
+
+            console.log("Login successful:", data);
+
+            toast.success("Login successful!");
+
+            router.push("/");
+
+        } catch (error) {
+            toast.error("Something went wrong. Please try again.");
+            console.error(error);
+        }
     };
+
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    }
 
     return (
         <main className="flex-1 bg-muted/30">
@@ -115,6 +147,7 @@ const SignInPage = () => {
                     </div>
 
                     <button
+                        onClick={handleGoogleSignIn}
                         type="button"
                         className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F97316]/30"
                     >
