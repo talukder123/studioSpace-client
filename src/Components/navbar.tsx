@@ -48,17 +48,17 @@ const Navbar = () => {
                         {/* Unauthenticated Actions */}
                         <div className="flex items-center gap-3">
                             <a
-                                href="/login"
+                                href="/signin"
                                 className="px-5 py-2.5 text-gray-700 font-semibold hover:text-orange-500 transition"
                             >
                                 Login
                             </a>
-                            <a
-                                href="/register"
+                            <Link
+                                href="/signup"
                                 className="px-5 py-2.5 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
                             >
                                 Register
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Authorized Actions -- */}
