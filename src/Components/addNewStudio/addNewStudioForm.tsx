@@ -18,6 +18,7 @@ import {
 } from "react-icons/fi";
 
 import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 const CATEGORIES = [
   "Photo Studio",
@@ -66,8 +67,7 @@ export type StudioSubmission = {
 };
 
 type AddNewStudioFormProps = {
-  owner?: StudioOwner;
-  onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
+    onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
 };
 
 interface FormValues {
@@ -100,10 +100,6 @@ const INITIAL_VALUES: FormValues = {
 };
 
 // Placeholder until authentication is integrated.
-const DEFAULT_OWNER: StudioOwner = {
-  name: "StudioSpace Host",
-  email: "host@studiospace.com",
-};
 
 const inputClass =
   "h-11 w-full rounded-lg border border-input bg-background px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-[#F97316] focus-visible:ring-2 focus-visible:ring-[#F97316]/20 dark:bg-input/30";
@@ -181,7 +177,7 @@ type FieldProps = {
 
 function Field({ id, label, required, error, children }: FieldProps) {
 
-    
+
   return (
     <div className="space-y-2">
       <label htmlFor={id} className="text-sm font-medium text-foreground">
@@ -361,7 +357,13 @@ const AddNewStudioForm = ({
   owner: ownerProp,
   onSubmit,
 }: AddNewStudioFormProps) => {
-  const owner = ownerProp ?? DEFAULT_OWNER;
+
+  const { data: session, isPending } = authClient.useSession();
+
+  const owner: StudioOwner = {
+    name: session?.user.name || "",
+    email: session?.user.email || "",
+  };
 
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>([]);
@@ -452,6 +454,14 @@ const AddNewStudioForm = ({
       setIsSubmitting(false);
     }
   };
+
+  if (isPending) {
+    return <p>Loading user information...</p>;
+}
+
+if (!session?.user) {
+    return <p>Please login to add a studio.</p>;
+}
 
   return (
     <form
@@ -609,14 +619,14 @@ const AddNewStudioForm = ({
           <TextField
             id="owner-name"
             label="Owner Name"
-            value={owner.name}
+            value={session?.user.name || ""}
             readOnly
           />
 
           <TextField
             id="owner-email"
             label="Owner Email"
-            value={owner.email}
+            value={session?.user.email || ""}
             type="email"
             readOnly
           />

@@ -16,7 +16,6 @@ const AddNewStudioPage = () => {
         const data = await res.json();
         console.log(data);
          toast.success("Studio added successfully!");
-    
   };
 
 

@@ -70,9 +70,6 @@ const Navbar = () => {
                             <Link href="/explore-studios" className="text-gray-600 hover:text-orange-500 transition">
                                 Explore Studios
                             </Link>
-                            <Link href="/add-new-studio" className="text-gray-600 hover:text-orange-500 transition">
-                                Temp add
-                            </Link>
                             <a href="#how-it-works" className="text-gray-600 hover:text-orange-500 transition">
                                 How It Works
                             </a>
@@ -83,10 +80,13 @@ const Navbar = () => {
 
                         {
                             user ? <Popover>
-                                <PopoverTrigger render={<Avatar>
+                                <PopoverTrigger render={
+                                    <button type="button" className="rounded-full">
+                                    <Avatar>
                                     <AvatarImage src={user?.image as string} />
                                     <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
-                                </Avatar>}>
+                                </Avatar>
+                                </button>}>
                                     Open Popover
                                 </PopoverTrigger>
                                 <PopoverContent
@@ -113,12 +113,12 @@ const Navbar = () => {
                                     {/* Menu */}
                                     <div className="space-y-1">
 
-                                        <Link href="/dashboard" className={menuItemClass}>
+                                        <Link href="/explore-studios" className={menuItemClass}>
                                             <LayoutDashboard size={17} />
                                             <span>Dashboard</span>
                                         </Link>
 
-                                        <Link href="/add-studio" className={menuItemClass}>
+                                        <Link href="/add-new-studio" className={menuItemClass}>
                                             <PlusCircle size={17} />
                                             <span>Add New Studio</span>
                                         </Link>
