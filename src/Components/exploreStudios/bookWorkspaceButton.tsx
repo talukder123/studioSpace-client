@@ -12,6 +12,7 @@ type BookWorkspaceButtonProps = {
     location: string;
     hourlyRate: number;
     securityDeposit: number | null;
+    imageUrl: string;
 };
 
 const BookWorkspaceButton = ({
@@ -21,6 +22,7 @@ const BookWorkspaceButton = ({
     location,
     hourlyRate,
     securityDeposit,
+    imageUrl,
 }: BookWorkspaceButtonProps) => {
     const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
@@ -50,6 +52,7 @@ const BookWorkspaceButton = ({
             securityDeposit,
             userName: user.name,
             userEmail: user.email,
+            imageUrl,
             bookingDate,
             fromTime,
             toTime,
