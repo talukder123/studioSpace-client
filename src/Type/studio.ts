@@ -4,7 +4,7 @@ export interface IStudio {
   category: string;
   overview: string;
   hourlyRate: number;
-  securityDeposit: number;
+  securityDeposit: number | null;
   maxCapacity: number;
   location: string;
   imageUrl: string;

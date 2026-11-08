@@ -1,3 +1,6 @@
+import EditStudioForm from "@/components/editStudioInfo/editStudioForm";
+
+
 interface Props {
     params: Promise<{
         id: string;
@@ -6,14 +9,18 @@ interface Props {
 
 
 
-const UpdateStudioPage = async({params}:Props) => {
-    const {id} = await params
+const UpdateStudioPage = async ({ params }: Props) => {
+    const { id } = await params
 
-    console.log(id);
+    const response = await fetch(`http://localhost:8000/studio/${id}`);
+    const studio = await response.json();
 
+
+    console.log("studio data for update -->",studio);
+    
     return (
-        <div>
-            
+        <div className="mx-auto w-full max-w-5xl px-4 py-10">
+            <EditStudioForm studio={studio}></EditStudioForm>
         </div>
     );
 };
