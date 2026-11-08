@@ -271,8 +271,12 @@ const StudioDetailPage = async ({ params }: StudioDetailPageProps) => {
 
                             <div className="mt-5">
                                 <BookWorkspaceButton
+                                studioId={studio._id}
                                     studioTitle={studio.title}
+                                    category={studio.category}
+                                    location={studio.location}
                                     hourlyRate={studio.hourlyRate}
+                                    securityDeposit={studio.securityDeposit}
                                 />
                             </div>
                         </div>
