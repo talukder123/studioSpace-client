@@ -1,6 +1,10 @@
+"use client";
+
 import { ImyBooking } from "@/Type/myBooking";
 import { CalendarDays, Clock, MapPin, Wallet } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 
 type MBKProps = {
@@ -14,6 +18,29 @@ const MyBookingCard = ({ booking }: MBKProps) => {
         Confirmed: "bg-green-100 text-green-700",
         Completed: "bg-blue-100 text-blue-700",
         Cancelled: "bg-red-100 text-red-700",
+    };
+
+    const [status, setStatus] = useState(booking.status);
+
+    const handleCancelBooking = async () => {
+        try {
+            const res = await fetch(`http://localhost:8000/cancel-booking/${booking._id}`, {
+                method: "PATCH",
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.message);
+            }
+
+            setStatus("Cancelled");
+            toast.success(data.message);
+
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to cancel booking!");
+        }
     };
 
 
@@ -99,10 +126,12 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                     <div className="rounded-xl border border-gray-100 bg-gray-50/70 px-3 py-3 text-right">
                         <p className="text-xs text-gray-500">Booking Status</p>
                         <span
-                            className={`mt-1.5 inline-block rounded-full border px-3 py-1 text-xs font-bold ${statusStyle[booking.status]
+                            className={`rounded-full px-3 py-1 text-xs font-semibold ${status === "Cancelled"
+                                    ? "bg-red-50 text-red-600"
+                                    : "bg-orange-50 text-orange-600"
                                 }`}
                         >
-                            {booking.status}
+                            {status}
                         </span>
                     </div>
 
@@ -117,9 +146,10 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                         </p>
                     </div>
 
-                    {booking.status === "Pending" && (
+                    {status === "Pending" && (
                         <button
                             type="button"
+                            onClick={handleCancelBooking}
                             className="shrink-0 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100"
                         >
                             Cancel Booking
