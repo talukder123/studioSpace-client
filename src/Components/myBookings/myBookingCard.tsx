@@ -126,10 +126,7 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                     <div className="rounded-xl border border-gray-100 bg-gray-50/70 px-3 py-3 text-right">
                         <p className="text-xs text-gray-500">Booking Status</p>
                         <span
-                            className={`rounded-full px-3 py-1 text-xs font-semibold ${status === "Cancelled"
-                                    ? "bg-red-50 text-red-600"
-                                    : "bg-orange-50 text-orange-600"
-                                }`}
+                            className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle[status]}`}
                         >
                             {status}
                         </span>

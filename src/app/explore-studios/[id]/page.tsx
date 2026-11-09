@@ -52,6 +52,15 @@ const StudioDetailPage = async ({ params }: StudioDetailPageProps) => {
         notFound();
     }
 
+    const bookingRes = await fetch(
+        `http://localhost:8000/check-studio-booking/${id}`,
+        {
+            cache: "no-store",
+        }
+    );
+
+    const bookingData = await bookingRes.json();
+
     return (
         <main className="flex-1 bg-muted/30">
             <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-14">
@@ -278,6 +287,7 @@ const StudioDetailPage = async ({ params }: StudioDetailPageProps) => {
                                     location={studio.location}
                                     hourlyRate={studio.hourlyRate}
                                     securityDeposit={studio.securityDeposit}
+                                    isBooked={bookingData.isBooked}
                                 />
                             </div>
                         </div>

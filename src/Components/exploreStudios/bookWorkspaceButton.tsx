@@ -13,6 +13,7 @@ type BookWorkspaceButtonProps = {
     hourlyRate: number;
     securityDeposit: number | null;
     imageUrl: string;
+    isBooked: boolean,
 };
 
 const BookWorkspaceButton = ({
@@ -23,6 +24,7 @@ const BookWorkspaceButton = ({
     hourlyRate,
     securityDeposit,
     imageUrl,
+    isBooked,
 }: BookWorkspaceButtonProps) => {
     const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
@@ -93,10 +95,14 @@ const BookWorkspaceButton = ({
         <>
             <button
                 type="button"
+                disabled={isBooked}
                 onClick={() => setIsOpen(true)}
-                className="w-full rounded-lg bg-[#F97316] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#EA580C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F97316]/40"
+                className={`w-full rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300 ${isBooked
+                        ? "cursor-not-allowed bg-gray-300 text-gray-500"
+                        : "bg-[#F97316] text-white shadow-lg shadow-orange-500/20 hover:bg-[#EA580C] hover:shadow-orange-500/30"
+                    }`}
             >
-                Book Workspace Now
+                {isBooked ? "Already Booked" : "Book Workspace Now"}
             </button>
 
             {isOpen && (
