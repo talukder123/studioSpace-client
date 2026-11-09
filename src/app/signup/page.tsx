@@ -68,7 +68,7 @@ const SignUpPage = () => {
 
             toast.success("Registration successful!");
 
-            router.push("/login");
+            router.push("/signin");
 
         } catch (error) {
             toast.error("Something went wrong!");

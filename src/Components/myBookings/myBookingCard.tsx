@@ -1,11 +1,11 @@
+
 "use client";
 
 import { ImyBooking } from "@/Type/myBooking";
-import { CalendarDays, Clock, MapPin, Wallet } from "lucide-react";
+import { CalendarDays, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
 
 type MBKProps = {
     booking: ImyBooking;
@@ -43,9 +43,8 @@ const MyBookingCard = ({ booking }: MBKProps) => {
         }
     };
 
-
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-gray-200/70 bg-white/80 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+        <div className="group relative overflow-hidden rounded-2xl border border-gray-200/70 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
             {/* Image */}
             <div className="relative h-44 overflow-hidden">
@@ -70,7 +69,7 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                 {/* Title & Price */}
                 <div>
                     <div className="flex items-center justify-between gap-3">
-                        <h2 className="truncate text-lg font-bold text-gray-900">
+                        <h2 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                             {booking.studioTitle}
                         </h2>
 
@@ -80,7 +79,7 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                         </p>
                     </div>
 
-                    <p className="mt-1.5 flex items-center gap-1.5 text-sm text-gray-500">
+                    <p className="mt-1.5 flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
                         <MapPin size={14} className="shrink-0 text-orange-500" />
                         {booking.location}
                     </p>
@@ -88,22 +87,22 @@ const MyBookingCard = ({ booking }: MBKProps) => {
 
                 {/* Booking Schedule */}
                 <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-gray-100 bg-gray-50/70 p-3">
+                    <div className="rounded-xl border border-gray-100 dark:border-zinc-700 bg-gray-50/70 dark:bg-zinc-800 p-3">
                         <p className="flex items-center gap-1.5 text-xs text-gray-400">
                             <CalendarDays size={14} />
                             Booking Date
                         </p>
-                        <p className="mt-1.5 text-sm font-semibold text-gray-800">
+                        <p className="mt-1.5 text-sm font-semibold text-gray-800 dark:text-gray-200">
                             {booking.bookingDate}
                         </p>
                     </div>
 
-                    <div className="rounded-xl border border-gray-100 bg-gray-50/70 p-3">
+                    <div className="rounded-xl border border-gray-100 dark:border-zinc-700 bg-gray-50/70 dark:bg-zinc-800 p-3">
                         <p className="flex items-center gap-1.5 text-xs text-gray-400">
                             <Clock size={14} />
                             Schedule
                         </p>
-                        <p className="mt-1.5 text-sm font-semibold text-gray-800">
+                        <p className="mt-1.5 text-sm font-semibold text-gray-800 dark:text-gray-200">
                             {booking.fromTime} - {booking.toTime}
                         </p>
                     </div>
@@ -112,19 +111,17 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                 {/* Security Deposit & Status */}
                 <div className="grid grid-cols-2 gap-3">
 
-                    {/* Security Deposit Box */}
-                    <div className="rounded-xl border border-orange-100 bg-orange-50/60 px-3 py-3">
-                        <p className="text-xs text-gray-500">Security Deposit</p>
-                        <p className="mt-1 text-sm font-bold text-gray-900">
+                    <div className="rounded-xl border border-orange-100 dark:border-orange-500/20 bg-orange-50/60 dark:bg-orange-500/10 px-3 py-3">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Security Deposit</p>
+                        <p className="mt-1 text-sm font-bold text-gray-900 dark:text-white">
                             {booking.securityDeposit !== null
                                 ? `$${booking.securityDeposit}`
                                 : "N/A"}
                         </p>
                     </div>
 
-                    {/* Status Box */}
-                    <div className="rounded-xl border border-gray-100 bg-gray-50/70 px-3 py-3 text-right">
-                        <p className="text-xs text-gray-500">Booking Status</p>
+                    <div className="rounded-xl border border-gray-100 dark:border-zinc-700 bg-gray-50/70 dark:bg-zinc-800 px-3 py-3 text-right">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Booking Status</p>
                         <span
                             className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle[status]}`}
                         >
@@ -135,10 +132,10 @@ const MyBookingCard = ({ booking }: MBKProps) => {
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between gap-3 border-t border-gray-100 pt-3">
+                <div className="flex items-center justify-between gap-3 border-t border-gray-100 dark:border-zinc-700 pt-3">
                     <div className="min-w-0">
                         <p className="text-xs text-gray-400">Booked By</p>
-                        <p className="truncate text-sm font-semibold text-gray-800">
+                        <p className="truncate text-sm font-semibold text-gray-800 dark:text-gray-200">
                             {booking.userName}
                         </p>
                     </div>

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeProvider from "@/components/themeProvider";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -25,14 +26,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn("h-full", "antialiased", googleSans.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
+        <ThemeProvider>
         <Navbar></Navbar>
         {children}
         <Footer></Footer>
         
         <ToastContainer position="top-right" autoClose={3000} />
+        </ThemeProvider>
         </body>
     </html>
   );

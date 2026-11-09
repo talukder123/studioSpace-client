@@ -67,7 +67,7 @@ export type StudioSubmission = {
 };
 
 type AddNewStudioFormProps = {
-    onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
+  onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
 };
 
 interface FormValues {
@@ -445,10 +445,12 @@ const AddNewStudioForm = ({
           ? "Studio added successfully."
           : "Form is valid. Connect the studio API to publish this listing.",
       });
-    } catch {
+    } catch (error) {
       setFeedback({
         type: "error",
-        message: "Unable to add your studio. Please try again.",
+        message: error instanceof Error
+          ? error.message
+          : "Unable to add your studio. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -457,11 +459,11 @@ const AddNewStudioForm = ({
 
   if (isPending) {
     return <p>Loading user information...</p>;
-}
+  }
 
-if (!session?.user) {
+  if (!session?.user) {
     return <p>Please login to add a studio.</p>;
-}
+  }
 
   return (
     <form
