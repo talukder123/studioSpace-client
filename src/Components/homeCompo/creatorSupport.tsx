@@ -43,7 +43,7 @@ const assurances: Assurance[] = [
 
 const CreatorSupport = () => {
   return (
-    <section
+    <section id="about"
       aria-labelledby="creator-support-heading"
       className="border-y border-border/60 bg-muted/30 py-20 sm:py-24"
     >

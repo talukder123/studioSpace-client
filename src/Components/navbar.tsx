@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/popover";
 
 import { Separator } from './ui/separator';
+
 import {
     Building2,
     CalendarDays,
@@ -49,7 +50,8 @@ const Navbar = () => {
     const menuItemClass =
         "flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-sm font-medium transition-all hover:bg-orange-500/10 hover:text-orange-600";
 
-    const { data: session } = authClient.useSession();
+    // Session
+    const { data: session, isPending } = authClient.useSession();
     const user = session?.user;
 
     const { setTheme } = useTheme();
@@ -221,7 +223,12 @@ const Navbar = () => {
                             </Button>
 
 
-                            {user ? (
+                            {/* Session Loading */}
+                            {isPending ? (
+
+                                <div className="h-10 w-10 md:w-44" />
+
+                            ) : user ? (
 
                                 /* Authenticated - Profile Avatar */
                                 <Popover open={open} onOpenChange={setOpen}>
