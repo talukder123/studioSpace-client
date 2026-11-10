@@ -476,7 +476,7 @@ const EditStudioForm = ({ studio, onSubmit }: EditStudioFormProps) => {
 
         try {
             const res = await fetch(
-                `http://localhost:8000/update-studio-info/${studio._id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/update-studio-info/${studio._id}`,
                 {
                     method: "PATCH",
                     headers: {

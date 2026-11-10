@@ -11,8 +11,8 @@ const ExploreStudiosPage = async ({
     const { category } = await searchParams;
 
     const url = category
-        ? `http://localhost:8000/studios?category=${encodeURIComponent(category)}`
-        : "http://localhost:8000/studios";
+        ? `${process.env.NEXT_PUBLIC_API_URL}/studios?category=${encodeURIComponent(category)}`
+        : `${process.env.NEXT_PUBLIC_API_URL}/studios`;
 
     const res = await fetch(url);
     const data: IStudio[] = await res.json();

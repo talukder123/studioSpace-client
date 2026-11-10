@@ -18,7 +18,7 @@ const MyBookingPage = async () => {
 
     const user = session?.user;
 
-    const res = await fetch(`http://localhost:8000/my-bookings?email=${user?.email}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-bookings?email=${user?.email}`)
     const data: ImyBooking[] = await res.json();
 
     const pendingCount = data.filter(

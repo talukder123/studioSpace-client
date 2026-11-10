@@ -12,7 +12,7 @@ interface Props {
 const UpdateStudioPage = async ({ params }: Props) => {
     const { id } = await params
 
-    const response = await fetch(`http://localhost:8000/studio/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studio/${id}`);
     const studio = await response.json();
 
 

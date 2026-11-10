@@ -41,7 +41,7 @@ const MyListingCard = ({ studio }: MyListingCardProps) => {
             }
 
             const res = await fetch(
-                `http://localhost:8000/delete-studio/${studio._id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/delete-studio/${studio._id}`,
                 {
                     method: "DELETE",
                     headers: {

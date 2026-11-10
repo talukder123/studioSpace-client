@@ -36,7 +36,7 @@ type StudioDetailPageProps = {
 const StudioDetailPage = async ({ params }: StudioDetailPageProps) => {
     const { id } = await params;
 
-    const res = await fetch(`http://localhost:8000/studio/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studio/${id}`);
 
     // The API answers unknown IDs with an HTML error page, so guard the parse.
     let studio: IStudio | null = null;
@@ -53,7 +53,7 @@ const StudioDetailPage = async ({ params }: StudioDetailPageProps) => {
     }
 
     const bookingRes = await fetch(
-        `http://localhost:8000/check-studio-booking/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/check-studio-booking/${id}`,
         {
             cache: "no-store",
         }

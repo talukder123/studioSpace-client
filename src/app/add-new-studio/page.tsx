@@ -10,7 +10,7 @@ const AddNewStudioPage = () => {
 
     if (!data?.token) throw new Error("Please login first.");
 
-    const res = await fetch("http://localhost:8000/add-new-studio", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/add-new-studio`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

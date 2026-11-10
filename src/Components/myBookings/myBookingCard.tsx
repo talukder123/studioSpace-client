@@ -24,7 +24,7 @@ const MyBookingCard = ({ booking }: MBKProps) => {
 
     const handleCancelBooking = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/cancel-booking/${booking._id}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cancel-booking/${booking._id}`, {
                 method: "PATCH",
             });
 

@@ -6,7 +6,7 @@ import { IStudio } from "@/Type/studio";
 import { MapPin, Star } from "lucide-react";
 
 const FeaturedStudios = async () => {
-    const res = await fetch("http://localhost:8000/featured-studios");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/featured-studios`);
     const data: IStudio[] = await res.json();
 
     return (

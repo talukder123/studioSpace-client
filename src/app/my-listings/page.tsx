@@ -20,7 +20,7 @@ const MyListingPage = async () => {
 
     const userEmail = session.user.email;
 
-    const res = await fetch(`http://localhost:8000/my-listings/${userEmail}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${userEmail}`, {
         cache: "no-store",
     });
 
