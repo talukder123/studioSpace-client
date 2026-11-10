@@ -15,10 +15,12 @@ import {
 } from "lucide-react";
 import { IStudio } from "@/Type/studio";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 interface MyListingCardProps {
     studio: IStudio;
 }
+
 
 const MyListingCard = ({ studio }: MyListingCardProps) => {
 
@@ -27,14 +29,24 @@ const MyListingCard = ({ studio }: MyListingCardProps) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
+
     const handleDelete = async () => {
         try {
             setIsDeleting(true);
+
+            const { data } = await authClient.token();
+
+            if (!data?.token) {
+                throw new Error("Please login first.");
+            }
 
             const res = await fetch(
                 `http://localhost:8000/delete-studio/${studio._id}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${data.token}`,
+                    },
                 }
             );
 
@@ -57,6 +69,7 @@ const MyListingCard = ({ studio }: MyListingCardProps) => {
             setIsDeleting(false);
         }
     };
+
 
 
     return (

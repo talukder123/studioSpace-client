@@ -1,32 +1,30 @@
 'use client';
 import AddNewStudioForm, { StudioSubmission } from "@/components/addNewStudio/addNewStudioForm";
+import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 
 const AddNewStudioPage = () => {
 
   const handleAddStudio = async (studio: StudioSubmission) => {
+    const { data } = await authClient.token();
+
+    if (!data?.token) throw new Error("Please login first.");
+
     const res = await fetch("http://localhost:8000/add-new-studio", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(studio),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.token}`,
+        },
+        body: JSON.stringify(studio),
     });
 
-    const data = await res.json();
+    const result = await res.json();
 
-    if (res.status === 409) {
-      toast.error(data.message || "This studio has already been added!");
-      throw new Error(data.message);
-    }
+    if (!res.ok) throw new Error(result.message || "Failed to add studio.");
 
-    if (!res.ok) {
-      throw new Error(data.message || "Failed to add studio.");
-    }
-
-    console.log(data);
     toast.success("Studio added successfully!");
-  };
+};
 
 
   return (

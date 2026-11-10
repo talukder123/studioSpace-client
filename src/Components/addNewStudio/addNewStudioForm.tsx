@@ -67,11 +67,7 @@ export type StudioSubmission = {
 };
 
 type AddNewStudioFormProps = {
-  owner: {
-        name: string;
-        email: string;
-    };
-  onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
+  onSubmit: (studio: StudioSubmission) => Promise<void> | void;
 };
 
 interface FormValues {
@@ -357,10 +353,7 @@ function Section({ icon: Icon, title, children, className }: SectionProps) {
   );
 }
 
-const AddNewStudioForm = ({
-  owner: ownerProp,
-  onSubmit,
-}: AddNewStudioFormProps) => {
+const AddNewStudioForm = ({ onSubmit }: AddNewStudioFormProps) => {
 
   const { data: session, isPending } = authClient.useSession();
 
@@ -438,16 +431,13 @@ const AddNewStudioForm = ({
       owner,
     };
 
+
     try {
-      if (onSubmit) {
-        await onSubmit(studio);
-      }
+      await onSubmit(studio);
 
       setFeedback({
         type: "success",
-        message: onSubmit
-          ? "Studio added successfully."
-          : "Form is valid. Connect the studio API to publish this listing.",
+        message: "Studio added successfully.",
       });
     } catch (error) {
       setFeedback({

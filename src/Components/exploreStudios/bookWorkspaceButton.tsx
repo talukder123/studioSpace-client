@@ -35,6 +35,7 @@ const BookWorkspaceButton = ({
     const [fromTime, setFromTime] = useState("");
     const [toTime, setToTime] = useState("");
 
+
     const handleConfirm = async () => {
         if (!user?.email) {
             toast.error("Please login to book a studio.");
@@ -61,12 +62,19 @@ const BookWorkspaceButton = ({
         };
 
         try {
+            const { data: tokenData } = await authClient.token();
+
+            if (!tokenData?.token) {
+                throw new Error("Please login first.");
+            }
+
             const res = await fetch(
                 `http://localhost:8000/book-studio/${studioId}`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${tokenData.token}`,
                     },
                     body: JSON.stringify(bookingData),
                 }
@@ -85,11 +93,17 @@ const BookWorkspaceButton = ({
             setBookingDate("");
             setFromTime("");
             setToTime("");
+
         } catch (error) {
-            toast.error("Something went wrong. Please try again.");
+            toast.error(
+                error instanceof Error
+                    ? error.message
+                    : "Something went wrong. Please try again."
+            );
             console.error(error);
         }
     };
+
 
     return (
         <>
@@ -98,8 +112,8 @@ const BookWorkspaceButton = ({
                 disabled={isBooked}
                 onClick={() => setIsOpen(true)}
                 className={`w-full rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-300 ${isBooked
-                        ? "cursor-not-allowed bg-gray-300 text-gray-500"
-                        : "bg-[#F97316] text-white shadow-lg shadow-orange-500/20 hover:bg-[#EA580C] hover:shadow-orange-500/30"
+                    ? "cursor-not-allowed bg-gray-300 text-gray-500"
+                    : "bg-[#F97316] text-white shadow-lg shadow-orange-500/20 hover:bg-[#EA580C] hover:shadow-orange-500/30"
                     }`}
             >
                 {isBooked ? "Already Booked" : "Book Workspace Now"}
