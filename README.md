@@ -1,55 +1,108 @@
 # StudioSpace
 
-### Creative Workspace & Studio Booking Platform
+### Creative Workspace & Studio Booking Marketplace
 
-**Live Website:** [StudioSpace](https://studiospace-frontend-azure.vercel.app/)
+<p align="center">
+  <a href="https://studiospace-frontend-azure.vercel.app/">
+    <strong>Explore Live Application ↗</strong>
+  </a>
+</p>
 
-StudioSpace is a modern creative workspace marketplace designed to connect creators with professional studios and creative spaces. Users can discover workspaces, explore detailed studio information, and book spaces that match their creative needs. Studio owners can also showcase their spaces and manage their listings through a personalized platform.
+StudioSpace is a modern creative workspace marketplace that connects creators with professional studios and creative space owners. Users can discover workspaces, explore studio details, and book spaces according to their creative requirements. Studio owners can also publish their spaces and manage their listings through a personalized experience.
 
 ---
 
-## Overview
+## 1. Project Overview
 
-StudioSpace provides a centralized platform for discovering, listing, and booking creative workspaces. It focuses on delivering a smooth experience for both creators looking for suitable spaces and hosts who want to make their studios available.
+StudioSpace provides a centralized platform for discovering, listing, and booking creative workspaces.
 
-The application features a responsive interface, secure authentication, dynamic studio exploration, personalized listing management, and an integrated booking experience.
+The application focuses on two primary user experiences:
 
-## Core Features
+- **Creators:** Discover creative spaces, compare facilities, explore studio details, and book suitable workspaces.
+- **Studio Owners:** Publish studio listings, manage workspace information, and maintain their personal listings.
 
-- **Studio Discovery:** Explore a collection of creative workspaces across multiple categories.
-- **Category-Based Exploration:** Browse Photo Studios, Film Stages, Podcast Rooms, Music Suites, and Art Workshops.
-- **Studio Details:** View studio descriptions, images, amenities, hourly rates, security deposits, capacity, and location.
-- **User Authentication:** Register and sign in using email/password or Google authentication.
-- **Studio Listing:** Authenticated users can publish their own creative spaces with detailed information.
+## 2. Key Features
+
+- **Studio Discovery:** Explore creative workspaces across multiple categories.
+- **Category Exploration:** Browse Photo Studios, Film Stages, Podcast Rooms, Music Suites, and Art Workshops.
+- **Studio Details:** View images, amenities, pricing, location, capacity, and host information.
+- **Authentication:** Register and sign in using email/password or Google authentication.
+- **Studio Listing:** Publish new creative spaces with detailed information.
 - **Listing Management:** View, update, and delete personal studio listings.
-- **Workspace Booking:** Select preferred booking dates and time slots to reserve a studio.
-- **Booking Management:** View booking history, monitor booking statuses, and cancel eligible bookings.
-- **Protected Operations:** JWT-based authentication for selected sensitive operations.
+- **Studio Booking:** Select preferred dates and time slots to book workspaces.
+- **Booking Management:** View booking history, track statuses, and cancel eligible bookings.
+- **Protected Operations:** JWT-based authentication for selected protected operations.
 - **Responsive Interface:** Optimized layouts for desktop, tablet, and mobile devices.
-- **Interactive Feedback:** Toast notifications, loading indicators, confirmation dialogs, and meaningful empty states.
+- **Interactive Feedback:** Toast notifications, loading indicators, and confirmation dialogs.
 
-## Technology Stack
+## 3. Technology Stack
 
 | Category | Technologies |
 |---|---|
-| Framework | Next.js |
+| Framework | Next.js (App Router) |
 | UI Library | React |
-| Programming Language | TypeScript |
+| Language | TypeScript |
 | Styling | Tailwind CSS |
-| Component Library | HeroUI, DaisyUI |
+| UI Components | HeroUI, DaisyUI |
 | Authentication | Better Auth |
 | API Communication | Fetch API |
-| Token Verification | JWT |
+| Token Authentication | JWT |
 | Icons | React Icons |
 | Carousel | Swiper.js |
 | Notifications | React Toastify |
 | Deployment | Vercel |
 
-## Application Architecture
+## 4. Project Architecture
 
-The frontend follows the Next.js App Router architecture, with a modular component structure that separates application routes, reusable UI components, authentication utilities, and shared TypeScript definitions.
+The frontend follows a modular architecture using the Next.js App Router. Application routes, reusable components, authentication utilities, and TypeScript definitions are organized separately to improve maintainability and scalability.
 
-### Project Structure
+### Application Working Flow
+
+```mermaid
+flowchart TD
+    A(["User Visits StudioSpace"]) --> B["Homepage"]
+    B --> C{"Choose an Action"}
+
+    C -->|"Explore"| D["Explore Studios"]
+    C -->|"Sign In / Sign Up"| E["Better Auth"]
+
+    D --> F["Studio Details"]
+    F --> G{"Authenticated?"}
+
+    G -->|"No"| E
+    G -->|"Yes"| H["Select Booking Date & Time"]
+    H --> I["Request JWT Token"]
+    I --> J["Submit Booking Request"]
+
+    E --> K["Authenticated Session"]
+    K --> L{"User Activity"}
+
+    L -->|"Browse Studios"| D
+    L -->|"Add Studio"| M["Studio Submission Form"]
+    L -->|"My Listings"| N["Manage Studio Listings"]
+    L -->|"My Bookings"| O["View Booking History"]
+
+    M --> P["Request JWT Token"]
+    P --> Q["Submit Studio Information"]
+
+    N --> R["Update or Delete Studio"]
+    R --> S["Protected API Request"]
+
+    J --> T["Backend API"]
+    Q --> T
+    S --> T
+    O --> T
+
+    T --> U["Display Operation Result"]
+    U --> V(["Updated User Interface"])
+
+    style A fill:#fff7ed,stroke:#f97316,color:#9a3412
+    style E fill:#eff6ff,stroke:#3b82f6,color:#1e40af
+    style T fill:#eff6ff,stroke:#3b82f6,color:#1e40af
+    style V fill:#ecfdf5,stroke:#10b981,color:#065f46
+```
+
+## 5. Project Folder Structure
 
 ```text
 studiospace-client/
@@ -120,125 +173,103 @@ studiospace-client/
 
 ### Directory Responsibilities
 
-| Directory / File | Description |
+| Directory / File | Responsibility |
 |---|---|
-| `src/app/` | Application pages and route definitions. |
-| `src/app/api/auth/` | Authentication API route handler. |
-| `src/components/` | Reusable interface components organized by feature. |
-| `src/lib/` | Authentication configuration and shared utilities. |
-| `src/Type/` | Shared TypeScript interfaces and type definitions. |
-| `public/` | Static images, icons, and other assets. |
-| `layout.tsx` | Root application layout and shared structure. |
-| `page.tsx` | Main homepage. |
-| `not-found.tsx` | Custom not-found page. |
-| `next.config.ts` | Next.js application configuration. |
+| `src/app/` | Application routes and page-level components |
+| `src/app/api/auth/` | Authentication API handler |
+| `src/components/` | Reusable UI components organized by feature |
+| `src/lib/` | Authentication configuration and shared utilities |
+| `src/Type/` | Shared TypeScript interfaces and types |
+| `public/` | Static images, icons, and assets |
+| `layout.tsx` | Root layout and shared application structure |
+| `page.tsx` | Main homepage |
+| `not-found.tsx` | Custom not-found page |
+| `next.config.ts` | Next.js application configuration |
 
-## Application Routes
+## 6. Application Routes
 
-| Route | Purpose | Access |
+| Route | Description | Access |
 |---|---|---|
 | `/` | Homepage and featured studios | Public |
 | `/explore-studios` | Explore available studios | Public |
-| `/explore-studios/[id]` | View individual studio details | Public |
+| `/explore-studios/[id]` | Individual studio details | Public |
 | `/explore-studios/edit/[id]` | Update studio information | Authenticated |
-| `/add-new-studio` | Publish a new studio listing | Authenticated |
+| `/add-new-studio` | Publish a new studio | Authenticated |
 | `/my-listings` | Manage personal studio listings | Authenticated |
 | `/my-bookings` | Manage personal bookings | Authenticated |
 | `/signin` | User sign-in | Public |
 | `/signup` | User registration | Public |
 
-## Application Workflow
+## 7. Application Workflow
 
-### 1. Authentication Workflow
+### Authentication
 
-StudioSpace uses Better Auth to manage user authentication and sessions.
-
-1. Users create an account or sign in using supported authentication methods.
+1. Users register or sign in using supported authentication methods.
 2. Better Auth validates credentials and establishes an authenticated session.
 3. When a protected operation is requested, the frontend retrieves a JWT.
-4. The token is included in the request's Authorization header.
-5. The server verifies the token using the authentication provider's public keys.
-6. Successfully verified requests proceed to the corresponding operation.
+4. The token is sent through the Authorization header.
+5. The server verifies the token before processing protected operations.
+6. The frontend displays the operation result.
 
-```text
-User
-  |
-  v
-Sign In / Registration
-  |
-  v
-Better Auth
-  |
-  v
-Authenticated Session
-  |
-  v
-JWT Generation
-  |
-  v
-Protected API Request
-  |
-  v
-Token Verification
-  |
-  v
-Authorized Operation
-```
+### Studio Exploration
 
-### 2. Studio Discovery Workflow
-
-1. Users navigate to the Explore Studios page.
+1. Users visit the Explore Studios page.
 2. The application retrieves available studio information.
-3. Studio data is displayed through reusable studio cards.
-4. Users can explore different studio categories.
+3. Studio cards display relevant information such as category, rating, price, and location.
+4. Users can explore studios by category.
 5. Selecting a studio opens its dedicated details page.
 
-### 3. Studio Listing Workflow
+### Studio Listing
 
 1. An authenticated user opens the Add New Studio page.
-2. The user provides studio details, pricing, location, images, and amenities.
+2. The user completes the studio information form.
 3. The application validates the submitted information.
-4. The request is sent with the required authentication token.
-5. The studio information is stored successfully.
-6. A notification confirms the operation.
+4. A JWT is requested and included in the submission.
+5. The studio listing is submitted for processing.
+6. A notification communicates the result.
 
-### 4. Listing Management Workflow
+### Studio Management
 
 1. Users access their personal listings.
 2. Existing studio information can be viewed and edited.
-3. The edit interface loads the selected studio's current information.
-4. Updated information is submitted and saved.
-5. Users can remove a listing after confirming the deletion.
+3. The edit page loads the selected studio's information.
+4. Updated information is submitted.
+5. Users can also delete listings after confirming the action.
+6. The listing interface refreshes to reflect the changes.
 
-### 5. Booking Workflow
+### Studio Booking
 
-1. Users open a studio details page.
-2. They select a preferred booking date and time.
+1. Users open an individual studio details page.
+2. They select their preferred booking date and time.
 3. The application validates the booking information.
 4. An authenticated booking request is submitted.
 5. The server verifies the request and checks for an existing pending booking.
-6. Successful bookings are saved.
+6. Successful bookings are processed.
 7. Users receive feedback about the booking result.
 
-### 6. Booking Management Workflow
+### Booking Management
 
 1. Users navigate to My Bookings.
 2. Their booking information is displayed.
-3. Booking statuses are presented for easy tracking.
+3. Booking statuses are available for tracking.
 4. Eligible bookings can be cancelled through the application.
 
-## User Interface & Experience
+## 8. Component Organization
 
-StudioSpace is designed with an emphasis on clarity, consistency, and accessibility.
+| Component Group | Responsibility |
+|---|---|
+| Navbar | Main navigation and authentication actions |
+| Footer | Shared footer and application information |
+| Home | Hero slider, featured studios, categories, and homepage sections |
+| Explore Studios | Studio cards and discovery interface |
+| Studio Details | Workspace information and booking interface |
+| Add New Studio | Studio submission form |
+| My Listings | Personal studio management |
+| My Bookings | Booking information and status management |
 
-- Responsive layouts across different screen sizes.
-- Consistent typography, spacing, and visual hierarchy.
-- Reusable components for maintainable UI development.
-- Clear navigation and intuitive user interactions.
-- Meaningful feedback for successful and unsuccessful operations.
-- Custom loading, empty, and error states.
+The application uses reusable components and shared TypeScript interfaces to maintain consistent UI patterns and improve code maintainability.
 
-## Installation & Local Development
+## 9. Installation & Local Development
 
 ### Prerequisites
 
@@ -246,62 +277,69 @@ StudioSpace is designed with an emphasis on clarity, consistency, and accessibil
 - npm
 - Git
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-### 2. Navigate to the Project Directory
+### Navigate to the Project
 
 ```bash
 cd studiospace-client
 ```
 
-### 3. Install Dependencies
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Start the Development Server
+### Start Development Server
 
 ```bash
 npm run dev
 ```
 
-The application will be available at:
+Open the application in your browser:
 
 ```text
 http://localhost:3000
 ```
 
-### 5. Production Build
-
-To generate an optimized production build:
+### Production Build
 
 ```bash
 npm run build
 ```
 
-To run the production build locally:
+### Run Production Build
 
 ```bash
 npm run start
 ```
 
-## Future Enhancements
+## 10. Design & User Experience
 
-- Comprehensive user reviews and ratings.
+StudioSpace focuses on a clean, modern, and intuitive interface.
+
+- Consistent visual hierarchy and typography.
+- Reusable and maintainable component architecture.
+- Responsive layouts across different screen sizes.
+- Clear navigation and intuitive user interactions.
+- Meaningful loading, success, and error feedback.
+- Custom confirmation dialogs and notifications.
+
+## 11. Future Enhancements
+
+- Complete user reviews and ratings functionality.
 - Advanced studio search and filtering.
-- Integrated online payment functionality.
+- Online payment integration.
 - Booking invoice generation.
 - Wishlist and saved studios.
-- Enhanced availability and scheduling management.
+- Enhanced booking availability management.
 
----
-
-## Project Summary
+## 12. Project Information
 
 | Attribute | Details |
 |---|---|
@@ -317,5 +355,7 @@ npm run start
 ---
 
 <p align="center">
-  **StudioSpace — Find Your Space. Create Your Vision.**
+  **StudioSpace**
+  <br/>
+  Find Your Space. Create Your Vision.
 </p>
