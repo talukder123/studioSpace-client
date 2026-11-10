@@ -9,6 +9,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeProvider from "@/components/themeProvider";
 
+import { Toaster } from "sonner";
+
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const googleSans  = Google_Sans_Flex({
@@ -37,6 +39,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         
         <ToastContainer position="top-right" autoClose={3000} />
         </ThemeProvider>
+        <Toaster
+        position="top-right"
+        richColors
+        closeButton
+        duration={3000}
+    />
         </body>
     </html>
   );

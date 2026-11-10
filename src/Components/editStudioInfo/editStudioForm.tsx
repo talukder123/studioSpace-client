@@ -19,7 +19,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import type { IStudio } from "@/Type/studio";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const CATEGORIES = [

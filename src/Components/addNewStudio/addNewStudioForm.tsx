@@ -67,6 +67,10 @@ export type StudioSubmission = {
 };
 
 type AddNewStudioFormProps = {
+  owner: {
+        name: string;
+        email: string;
+    };
   onSubmit?: (studio: StudioSubmission) => Promise<void> | void;
 };
 

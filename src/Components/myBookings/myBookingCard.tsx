@@ -5,7 +5,7 @@ import { ImyBooking } from "@/Type/myBooking";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 type MBKProps = {
     booking: ImyBooking;

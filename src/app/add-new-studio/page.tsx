@@ -1,6 +1,6 @@
 'use client';
 import AddNewStudioForm, { StudioSubmission } from "@/components/addNewStudio/addNewStudioForm";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const AddNewStudioPage = () => {
 

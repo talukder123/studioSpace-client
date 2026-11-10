@@ -3,7 +3,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 type BookWorkspaceButtonProps = {
     studioId: string;

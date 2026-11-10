@@ -1,6 +1,8 @@
+import EmptyState from '@/components/emptyState';
 import MyBookingCard from '@/components/myBookings/myBookingCard';
 import { auth } from '@/lib/auth';
 import { ImyBooking } from '@/Type/myBooking';
+import { CalendarDays } from 'lucide-react';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -17,10 +19,10 @@ const MyBookingPage = async () => {
     const user = session?.user;
 
     const res = await fetch(`http://localhost:8000/my-bookings?email=${user?.email}`)
-    const data = await res.json()
+    const data: ImyBooking[] = await res.json();
 
     const pendingCount = data.filter(
-        (booking: ImyBooking) => booking.status === "Pending"
+        (booking) => booking.status === "Pending"
     ).length;
 
     return (
@@ -51,10 +53,28 @@ const MyBookingPage = async () => {
             </div>
 
             {/* Booking Cards */}
-            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-5 lg:grid-cols-3">
-                {data.map((booking: ImyBooking) => (
-                    <MyBookingCard key={booking._id} booking={booking} />
-                ))}
+            {/* Booking Cards */}
+            <div className="mx-auto max-w-7xl px-4 py-5">
+
+                {data.length === 0 ? (
+                    <EmptyState
+                        icon={<CalendarDays size={36} />}
+                        title="No Bookings Yet"
+                        description="You haven't booked any creative spaces yet. Explore our studios and find the perfect workspace for your next creative session."
+                        actionLabel="Explore Studios"
+                        actionHref="/explore-studios"
+                    />
+                ) : (
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                        {data.map((booking: ImyBooking) => (
+                            <MyBookingCard
+                                key={booking._id}
+                                booking={booking}
+                            />
+                        ))}
+                    </div>
+                )}
+
             </div>
 
             {/* Closing Message */}

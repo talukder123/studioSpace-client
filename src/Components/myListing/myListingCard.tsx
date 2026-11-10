@@ -14,7 +14,7 @@ import {
     X,
 } from "lucide-react";
 import { IStudio } from "@/Type/studio";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 interface MyListingCardProps {
     studio: IStudio;
