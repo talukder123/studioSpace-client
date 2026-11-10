@@ -1,100 +1,55 @@
-# StudioSpace — Creative Workspace Marketplace
+# StudioSpace
 
-<p align="center">
-  **Find Your Space. Create Your Vision.**
-</p>
+### Creative Workspace & Studio Booking Platform
 
-<p align="center">
-  A peer-to-peer creative workspace marketplace built with Next.js, TypeScript, and Tailwind CSS.
-</p>
+**Live Website:** [StudioSpace](https://studiospace-frontend-azure.vercel.app/)
 
-<p align="center">
-  <a href="https://studiospace-frontend-azure.vercel.app/">Live Website</a>
-</p>
+StudioSpace is a modern creative workspace marketplace designed to connect creators with professional studios and creative spaces. Users can discover workspaces, explore detailed studio information, and book spaces that match their creative needs. Studio owners can also showcase their spaces and manage their listings through a personalized platform.
 
 ---
 
-## 1. Project Overview
+## Overview
 
-StudioSpace is a peer-to-peer creative workspace and studio-sharing marketplace that connects creative professionals with workspace owners.
+StudioSpace provides a centralized platform for discovering, listing, and booking creative workspaces. It focuses on delivering a smooth experience for both creators looking for suitable spaces and hosts who want to make their studios available.
 
-The platform allows users to explore different types of creative spaces, view detailed studio information, and book suitable workspaces according to their requirements.
+The application features a responsive interface, secure authentication, dynamic studio exploration, personalized listing management, and an integrated booking experience.
 
-Studio owners can also register, authenticate, list their own studios, and manage their listings through a personalized dashboard.
+## Core Features
 
-The main goal of StudioSpace is to make finding and sharing creative workspaces easier through a centralized and user-friendly platform.
+- **Studio Discovery:** Explore a collection of creative workspaces across multiple categories.
+- **Category-Based Exploration:** Browse Photo Studios, Film Stages, Podcast Rooms, Music Suites, and Art Workshops.
+- **Studio Details:** View studio descriptions, images, amenities, hourly rates, security deposits, capacity, and location.
+- **User Authentication:** Register and sign in using email/password or Google authentication.
+- **Studio Listing:** Authenticated users can publish their own creative spaces with detailed information.
+- **Listing Management:** View, update, and delete personal studio listings.
+- **Workspace Booking:** Select preferred booking dates and time slots to reserve a studio.
+- **Booking Management:** View booking history, monitor booking statuses, and cancel eligible bookings.
+- **Protected Operations:** JWT-based authentication for selected sensitive operations.
+- **Responsive Interface:** Optimized layouts for desktop, tablet, and mobile devices.
+- **Interactive Feedback:** Toast notifications, loading indicators, confirmation dialogs, and meaningful empty states.
 
-## 2. Live Application
-
-**Frontend:** https://studiospace-frontend-azure.vercel.app/
-
-**Backend API:** https://studiospace-backend-tawny.vercel.app/
-
-**Frontend Hosting:** Vercel
-
-**Backend Hosting:** Vercel
-
-**Database:** MongoDB Atlas
-
-## 3. Key Features
-
-### Authentication & User Management
-- User registration and login.
-- Google authentication.
-- Session management using Better Auth.
-- JWT-based authentication for protected API operations.
-- Personalized user profile and navigation.
-
-### Studio Discovery
-- Browse all available creative studios.
-- Explore studios by category.
-- View featured studios on the homepage.
-- View studio ratings, hourly pricing, and location.
-- Access detailed studio information.
-
-### Studio Management
-- Add new studio listings.
-- Update existing studio information.
-- View personal studio listings.
-- Delete studio listings with confirmation.
-- Manage studio amenities and workspace information.
-
-### Booking Management
-- Book a studio by selecting a date and time.
-- Prevent duplicate pending bookings for a studio.
-- View personal booking history.
-- Check booking status.
-- Cancel eligible bookings.
-
-### User Experience
-- Fully responsive interface.
-- Interactive navigation and dropdown menus.
-- Toast notifications for user feedback.
-- Custom confirmation dialogs.
-- Loading and empty states.
-- Custom not-found page.
-
-## 4. Technologies Used
+## Technology Stack
 
 | Category | Technologies |
 |---|---|
-| Framework | Next.js (App Router) |
+| Framework | Next.js |
 | UI Library | React |
-| Language | TypeScript |
+| Programming Language | TypeScript |
 | Styling | Tailwind CSS |
-| Components | HeroUI / DaisyUI (where used) |
+| Component Library | HeroUI, DaisyUI |
 | Authentication | Better Auth |
 | API Communication | Fetch API |
-| API Security | JWT, JOSE |
-| Database | MongoDB |
+| Token Verification | JWT |
 | Icons | React Icons |
-| Slider | Swiper.js |
+| Carousel | Swiper.js |
 | Notifications | React Toastify |
 | Deployment | Vercel |
 
-## 5. Project Folder Structure
+## Application Architecture
 
-The frontend follows the Next.js App Router architecture.
+The frontend follows the Next.js App Router architecture, with a modular component structure that separates application routes, reusable UI components, authentication utilities, and shared TypeScript definitions.
+
+### Project Structure
 
 ```text
 studiospace-client/
@@ -157,71 +112,59 @@ studiospace-client/
 │   └── Type/
 │       └── ...
 │
-├── .env.local
 ├── next.config.ts
 ├── package.json
 ├── tsconfig.json
 └── README.md
 ```
 
-### Folder & File Responsibilities
+### Directory Responsibilities
 
-| Folder / File | Responsibility |
+| Directory / File | Description |
 |---|---|
-| `src/app/` | Application routes and pages |
-| `src/app/api/auth/` | Better Auth API handler |
-| `src/components/` | Reusable UI components |
-| `src/lib/` | Authentication configuration and shared utilities |
-| `src/Type/` | TypeScript interfaces and type definitions |
-| `public/` | Static assets and images |
-| `layout.tsx` | Root layout and shared application structure |
-| `page.tsx` | Homepage |
-| `not-found.tsx` | Custom 404 page |
-| `next.config.ts` | Next.js configuration |
+| `src/app/` | Application pages and route definitions. |
+| `src/app/api/auth/` | Authentication API route handler. |
+| `src/components/` | Reusable interface components organized by feature. |
+| `src/lib/` | Authentication configuration and shared utilities. |
+| `src/Type/` | Shared TypeScript interfaces and type definitions. |
+| `public/` | Static images, icons, and other assets. |
+| `layout.tsx` | Root application layout and shared structure. |
+| `page.tsx` | Main homepage. |
+| `not-found.tsx` | Custom not-found page. |
+| `next.config.ts` | Next.js application configuration. |
 
-## 6. Application Routes
+## Application Routes
 
-| Route | Description | Access |
+| Route | Purpose | Access |
 |---|---|---|
-| `/` | Homepage with featured studios and categories | Public |
-| `/explore-studios` | Browse all studios | Public |
-| `/explore-studios/[id]` | Individual studio details and booking | Public |
-| `/explore-studios/edit/[id]` | Edit studio information | Authenticated |
-| `/add-new-studio` | Add a new studio listing | Authenticated |
+| `/` | Homepage and featured studios | Public |
+| `/explore-studios` | Explore available studios | Public |
+| `/explore-studios/[id]` | View individual studio details | Public |
+| `/explore-studios/edit/[id]` | Update studio information | Authenticated |
+| `/add-new-studio` | Publish a new studio listing | Authenticated |
 | `/my-listings` | Manage personal studio listings | Authenticated |
-| `/my-bookings` | View personal bookings | Authenticated |
-| `/signin` | User login | Public |
+| `/my-bookings` | Manage personal bookings | Authenticated |
+| `/signin` | User sign-in | Public |
 | `/signup` | User registration | Public |
 
-## 7. Application Working Flow
+## Application Workflow
 
-### 7.1 Authentication Flow
+### 1. Authentication Workflow
 
-StudioSpace uses Better Auth for user authentication and session management.
+StudioSpace uses Better Auth to manage user authentication and sessions.
 
-The authentication process works as follows:
-
-1. A user registers or signs in using email/password or Google authentication.
-2. Better Auth validates the user's credentials.
-3. The authentication session is maintained by Better Auth.
-4. When a protected operation is required, the frontend requests a JWT using `authClient.token()`.
-5. The frontend sends the JWT to the backend through the Authorization header.
-6. The backend verifies the token using the Better Auth JWKS endpoint.
-7. If verification succeeds, the protected API operation proceeds.
-
-**JWT Request Header:**
-
-```http
-Authorization: Bearer <JWT_TOKEN>
-```
-
-**Authentication Flow:**
+1. Users create an account or sign in using supported authentication methods.
+2. Better Auth validates credentials and establishes an authenticated session.
+3. When a protected operation is requested, the frontend retrieves a JWT.
+4. The token is included in the request's Authorization header.
+5. The server verifies the token using the authentication provider's public keys.
+6. Successfully verified requests proceed to the corresponding operation.
 
 ```text
 User
   |
   v
-Sign In / Sign Up
+Sign In / Registration
   |
   v
 Better Auth
@@ -230,202 +173,112 @@ Better Auth
 Authenticated Session
   |
   v
-Frontend Requests JWT
+JWT Generation
   |
   v
-JWT Sent to Backend
+Protected API Request
   |
   v
-Backend JWT Verification
+Token Verification
   |
   v
-Protected API Access
+Authorized Operation
 ```
 
-### 7.2 Studio Exploration Flow
+### 2. Studio Discovery Workflow
 
-1. The user visits the Explore Studios page.
-2. The frontend requests studio information from the backend.
-3. The backend retrieves studio documents from MongoDB.
-4. Studio information is returned as JSON.
-5. The frontend displays the studios using reusable Studio Card components.
-6. The user can open an individual studio to view its details.
+1. Users navigate to the Explore Studios page.
+2. The application retrieves available studio information.
+3. Studio data is displayed through reusable studio cards.
+4. Users can explore different studio categories.
+5. Selecting a studio opens its dedicated details page.
 
-```text
-Explore Studios Page
-        |
-        v
-GET /studios
-        |
-        v
-Express Backend
-        |
-        v
-MongoDB Studios Collection
-        |
-        v
-JSON Response
-        |
-        v
-Studio Cards
-        |
-        v
-Studio Details Page
-```
-
-### 7.3 Add Studio Flow
+### 3. Studio Listing Workflow
 
 1. An authenticated user opens the Add New Studio page.
-2. The user fills in the studio information.
-3. The frontend validates the submitted form.
-4. The frontend requests a JWT from Better Auth.
-5. The studio information and JWT are sent to the backend.
-6. The backend verifies the JWT.
-7. The studio information is inserted into MongoDB.
-8. A success or error notification is displayed.
+2. The user provides studio details, pricing, location, images, and amenities.
+3. The application validates the submitted information.
+4. The request is sent with the required authentication token.
+5. The studio information is stored successfully.
+6. A notification confirms the operation.
 
-**API:** `POST /add-new-studio`
+### 4. Listing Management Workflow
 
-### 7.4 Update Studio Flow
+1. Users access their personal listings.
+2. Existing studio information can be viewed and edited.
+3. The edit interface loads the selected studio's current information.
+4. Updated information is submitted and saved.
+5. Users can remove a listing after confirming the deletion.
 
-1. The user opens their studio listing.
-2. The user selects the Edit option.
-3. The existing studio information is loaded.
-4. The user updates the required fields.
-5. The frontend sends the updated information to the backend.
-6. The backend updates the corresponding MongoDB document.
-7. The updated information is displayed.
+### 5. Booking Workflow
 
-**API:** `PATCH /update-studio-info/:id`
+1. Users open a studio details page.
+2. They select a preferred booking date and time.
+3. The application validates the booking information.
+4. An authenticated booking request is submitted.
+5. The server verifies the request and checks for an existing pending booking.
+6. Successful bookings are saved.
+7. Users receive feedback about the booking result.
 
-### 7.5 Delete Studio Flow
+### 6. Booking Management Workflow
 
-1. The user selects the Delete option from a studio listing.
-2. A confirmation dialog appears.
-3. After confirmation, the frontend requests a JWT.
-4. The frontend sends a DELETE request with the JWT.
-5. The backend verifies the JWT.
-6. The corresponding studio document is deleted from MongoDB.
-7. The frontend refreshes the listing and displays a notification.
+1. Users navigate to My Bookings.
+2. Their booking information is displayed.
+3. Booking statuses are presented for easy tracking.
+4. Eligible bookings can be cancelled through the application.
 
-**API:** `DELETE /delete-studio/:id`
+## User Interface & Experience
 
-### 7.6 Studio Booking Flow
+StudioSpace is designed with an emphasis on clarity, consistency, and accessibility.
 
-1. A user opens a studio details page.
-2. The user selects a preferred booking date.
-3. The user chooses the starting and ending time.
-4. The frontend validates the booking information.
-5. The frontend requests a JWT from Better Auth.
-6. The booking information and JWT are sent to the backend.
-7. The backend verifies the JWT and checks for an existing pending booking.
-8. If the booking is accepted, a new booking document is inserted into MongoDB.
-9. The user receives a success notification.
+- Responsive layouts across different screen sizes.
+- Consistent typography, spacing, and visual hierarchy.
+- Reusable components for maintainable UI development.
+- Clear navigation and intuitive user interactions.
+- Meaningful feedback for successful and unsuccessful operations.
+- Custom loading, empty, and error states.
 
-**API:** `POST /book-studio/:id`
-
-### 7.7 My Bookings Flow
-
-1. The authenticated user opens My Bookings.
-2. The frontend requests the user's booking information.
-3. The backend retrieves the matching booking documents.
-4. The frontend displays booking details and their current statuses.
-5. Eligible bookings can be cancelled.
-
-**Related APIs:**
-- `GET /my-bookings?email=:email`
-- `PATCH /cancel-booking/:id`
-
-## 8. Backend Integration
-
-The frontend communicates with the StudioSpace Express.js backend through REST APIs.
-
-The backend handles:
-- HTTP requests and responses.
-- MongoDB database operations.
-- Studio and booking data management.
-- JWT verification for selected protected operations.
-- Duplicate booking checks.
-
-The frontend uses the Fetch API to communicate with the backend.
-
-The backend base URL is configured through an environment variable.
-
-```env
-NEXT_PUBLIC_API_URL=https://studiospace-backend-tawny.vercel.app
-```
-
-## 9. Environment Variables
-
-Create a `.env.local` file in the project root.
-
-```env
-NEXT_PUBLIC_API_URL=your_backend_api_url
-
-BETTER_AUTH_URL=http://localhost:3000
-BETTER_AUTH_SECRET=your_better_auth_secret
-
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-```
-
-**Important:**
-- Replace placeholder values with your actual credentials.
-- Configure production environment variables in Vercel.
-- Never expose secret credentials in client-side code.
-- Do not commit `.env.local` to GitHub.
-
-## 10. Installation & Local Setup
-
-Follow these steps to run StudioSpace locally.
+## Installation & Local Development
 
 ### Prerequisites
 
 - Node.js
 - npm
 - Git
-- MongoDB Atlas account
-- Google OAuth credentials (if using Google Sign-In)
 
-### Step 1: Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone <your-frontend-repository-url>
+git clone <repository-url>
 ```
 
-### Step 2: Navigate to the Project
+### 2. Navigate to the Project Directory
 
 ```bash
 cd studiospace-client
 ```
 
-### Step 3: Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Step 4: Configure Environment Variables
-
-Create `.env.local` and configure the required environment variables.
-
-### Step 5: Start the Development Server
+### 4. Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-Open the following URL:
+The application will be available at:
 
 ```text
 http://localhost:3000
 ```
 
-**Note:** The backend server must also be configured and running for API-dependent features to work locally.
+### 5. Production Build
 
-## 11. Production Build
-
-To create an optimized production build:
+To generate an optimized production build:
 
 ```bash
 npm run build
@@ -437,45 +290,32 @@ To run the production build locally:
 npm run start
 ```
 
-## 12. Deployment
+## Future Enhancements
 
-The StudioSpace frontend is deployed using Vercel.
-
-Production URL:
-
-https://studiospace-frontend-azure.vercel.app/
-
-The production environment uses the deployed Express backend API and configured Better Auth credentials.
-
-## 13. Future Improvements
-
-- User reviews and a complete rating system.
+- Comprehensive user reviews and ratings.
 - Advanced studio search and filtering.
-- Online payment integration.
+- Integrated online payment functionality.
 - Booking invoice generation.
-- Wishlist functionality.
-- Improved availability and scheduling management.
+- Wishlist and saved studios.
+- Enhanced availability and scheduling management.
 
 ---
 
-## 14. Project Information
+## Project Summary
 
-**Project Name:** StudioSpace
-
-**Project Type:** Full-Stack Web Application
-
-**Frontend Framework:** Next.js
-
-**Backend:** Express.js
-
-**Database:** MongoDB
-
-**Authentication:** Better Auth + JWT
-
-**Deployment:** Vercel
-
-**Live Application:** https://studiospace-frontend-azure.vercel.app/
+| Attribute | Details |
+|---|---|
+| Project Name | StudioSpace |
+| Project Type | Creative Workspace Marketplace |
+| Application | Frontend Web Application |
+| Framework | Next.js |
+| Language | TypeScript |
+| Authentication | Better Auth |
+| Styling | Tailwind CSS |
+| Deployment | Vercel |
 
 ---
 
-**StudioSpace — Find Your Space. Create Your Vision.**
+<p align="center">
+  **StudioSpace — Find Your Space. Create Your Vision.**
+</p>
